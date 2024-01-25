@@ -35,7 +35,14 @@ const color2: Record<Properties, RGB | string> = {
 }
 
 
-// You can't also define your own utility functions
+// You can also define your own utility functions
+
+// Example 1 -> make all properties readonly
 type ReadOnlyProps1<T> = {
     readonly [P in keyof T]: T[P];
 }
+
+// Example 2 -> extract values as options
+type ArrayValueType<T> = T extends readonly string[] ? T[number] : never;
+
+let myPerson: ArrayValueType<typeof color1>
