@@ -103,6 +103,72 @@ const result1 = getKyeWithHighestValue({ a: 1, b: 2, c: 3 })
 result1.key // highestKey -> c
 result1.value // highestValue -> 3
 
+// const typedObjectKeys = <TObj extends {}> (obj: TObj) : Array<keyof TObj> => {
+//     return Object.keys(obj)
+// }
+/**
+ * 8. Sometimes return type won't work properly, comment out above to check the errors
+ */
+const typedObjectKeys = <TObj extends {}> (obj: TObj) => {
+    return Object.keys(obj) as Array<keyof TObj>
+}
+
+const result3 = typedObjectKeys({ name: "Rk", age: 28 })
+
+
+/**
+ * 9. Parameter generic
+ */
+const getValue1 = <TObj> (obj: TObj, key: keyof TObj) => {
+    // if(key)
+}
+
+const result4 = getValue1({ a: 1, b: 2, c: 3 }, "a")
+
+// make it more generic
+const getValue2 = <TObj, TKey extends keyof TObj> (obj: TObj, key: TKey) => {
+    // if(key)
+}
+
+const result5 = getValue1({ a: 1, b: 2, c: 3 }, "b") // now you have auto-complete in second parameter
+
+
+/**
+ * 10. Default Generic
+ */
+const createSet = <T> () => new Set<T>();
+
+const numberSet = createSet<number>() // it creates a number Set
+const unknownSet = createSet(); // it create a unknown set
+
+// We can fix this by adding `Default Type`
+const createSet1 = <T = string> () => new Set<T>();
+const unknownSet1 = createSet1() // it create string Set by default
+
+/**
+ * 11. Make Fix Generic 
+ */
+type APIResponse<Data> = {
+    data: Data,
+    isError: boolean
+}
+
+const response: APIResponse<string> = {
+    data: "sdf",
+    isError: false
+}
+
+// what If we want our data to be Object only
+
+type APIResponse1<Data extends Object = { status: number }> = {
+    data: Data,
+    isError: boolean
+}
+
+const response1: APIResponse<string> = {
+    data: "sdf",
+    isError: false
+}
 
 // 1. `<S extends string>` means now we can pass only string type in `ExtractColor`
 // 2. `= S extends "text-red-500" represent condition for ternary operator
