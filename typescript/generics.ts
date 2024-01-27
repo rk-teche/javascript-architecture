@@ -79,7 +79,7 @@ const getKyeWithHighestValue = <TObj extends Record<string, number>> (obj: TObj)
     const keys = Object.keys(obj) as Array<keyof TObj>
 
     // take first key & value
-    let highestKey: keyof TObj = keys[0];
+    let highestKey: keyof TObj = keys?.[0];
     let highestValue = obj[highestKey]
 
     // find highest key, value in object
