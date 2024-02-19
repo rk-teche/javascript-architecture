@@ -73,68 +73,46 @@ class Node
         // left - root - right
         #inOrderIterator(node, nodesOrder = [])
         {
-                // base condition
-                if(!node.left)
-                {
-                    nodesOrder.push(node.value);
-                    return;
-                }
-
-                let pNode = node;
-                this.#inOrderIterator(node.left, nodesOrder);
-                nodesOrder.push(pNode.value);
-            
-                if(pNode.right)
-                {
-                    this.#inOrderIterator(pNode.right, nodesOrder);
-                }
-            
-
+            // base condition
+            if(!node)
+            {
                 return nodesOrder;
+            }
+            node.left && this.#inOrderIterator(node.left, nodesOrder);
+            nodesOrder.push(node.value);
+            pNode.right && this.#inOrderIterator(pNode.right, nodesOrder);
+        
+            return nodesOrder;
         }
 
         // root - left - right
         #preOrderIterator(node, nodesOrder = [])
         {
-                // base condition
-                if(!node.left)
-                {
-                    nodesOrder.push(node.value);
-                    return;
-                }
-
-                let pNode = node;
-                nodesOrder.push(pNode.value);
-                this.#preOrderIterator(node.left, nodesOrder);
-                if(pNode.right)
-                {
-                    this.#preOrderIterator(pNode.right, nodesOrder);
-                }
-            
-
+            // base condition
+            if(!node)
+            {
                 return nodesOrder;
+            }
+            nodesOrder.push(node.value);
+            node.left && this.#preOrderIterator(node.left, nodesOrder);
+            pNode.right && this.#preOrderIterator(pNode.right, nodesOrder);
+            
+            return nodesOrder;
         }
 
         // left - right - root
         #postOrderIterator(node, nodesOrder = [])
         {
-                // base condition
-                if(!node.left)
-                {
-                    nodesOrder.push(node.value);
-                    return;
-                }
+           // base condition
+           if(!node)
+           {
+               return nodesOrder;
+           }
+           node.left && this.#postOrderIterator(node.left, nodesOrder);
+           pNode.right && this.#postOrderIterator(pNode.right, nodesOrder); 
+           nodesOrder.push(node.value);
 
-                let pNode = node;
-                this.#postOrderIterator(node.left, nodesOrder);
-                if(pNode.right)
-                {
-                    this.#postOrderIterator(pNode.right, nodesOrder);
-                }
-                nodesOrder.push(pNode.value);
-            
-
-                return nodesOrder;
+           return nodesOrder;
         }
         
 
