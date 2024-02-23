@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker Example</title>
+</head>
+<body>
+    <p>Enter a number to calculate its Fibonacci:</p>
+    <input type="number" id="inputNumber">
+    <button onclick="calculateFibonacci()">Calculate</button>
+    <p id="result"></p>
+
+    <script>
+        // Function to handle the button click event
+        function calculateFibonacci() {
+            // Get the input value
+            const inputNumber = parseInt(document.getElementById('inputNumber').value);
+
+            // Create a new worker
+            const worker = new Worker('fibonacci_worker.js');
+
+            // Listen for messages from the worker
+            worker.onmessage = function(e) {
+                // Update the result in the main thread
+                document.getElementById('result').textContent = `Fibonacci(${inputNumber}) = ${e.data}`;
+            };
+
+            // Send the input number to the worker
+            worker.postMessage(inputNumber);
+        }
+    </script>
+</body>
+</html>
