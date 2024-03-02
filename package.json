@@ -5,12 +5,16 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-browser-runner runSpecs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "jasmine-browser-runner": "^2.3.0",
+    "jasmine-core": "^5.1.2"
   }
 }
